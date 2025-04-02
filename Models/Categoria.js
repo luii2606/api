@@ -11,7 +11,7 @@ class Categoria{
      * @throws {Error} lanza un error si no se puede obtener los registros
      * @description metodo para obtener los registros de la base de datos
      */ 
-    async getAll(){
+    async getAllcategorias(){
         try{
             const [rows] = await conection.query("SELECT * FROM categorias");
             return rows;

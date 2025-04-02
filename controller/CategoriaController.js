@@ -1,8 +1,9 @@
 import Categoria from "../Models/Categoria.js";
+
 class CategoriaController{
     static getAllCategorias = async (req, res) =>{
         const OBJCategoria = new Categoria();
-        const categorias = await OBJCategoria.getAll();
+        const categorias = await OBJCategoria.getAllcategorias();
         res.json(categorias);
         // res.json("Listado de categorias");
        

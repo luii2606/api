@@ -1,10 +1,10 @@
 import conection from "../utils/db.js";
 
 class Categoria{
-    constructor(nombre, descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
+    // constructor(nombre, descripcion) {
+    //     this.nombre = nombre;
+    //     this.descripcion = descripcion;
+    // }
     /**
      * 
      * @returns {Array} retorna un array con los registros de la base de datos
@@ -21,17 +21,46 @@ class Categoria{
         }
 
     }
-    async postcategorias(){
+    async postcategorias(nombre, descripcion, id){
         try{
-            const [result] = await conection.query("INSERT INTO categorias (nombre,descripcion) values (?,?)", [this.nombre, this.descripcion]);
+            const [result] = await conection.query("INSERT INTO categorias (nombre,descripcion) values (?,?)", [nombre, descripcion,id]);
             return {
-                id: result.id,
-                nombre: this.nombre,
-                descripcion: this.descripcion,
+                id: result.id,nombre,descripcion
             };
         } catch(error){
             throw new Error("Error al crear la categoria");
         }
+  }
+
+  async update(nombre,descripcion,id) {
+    try {
+      const [result] = await conection.query("UPDATE categorias set nombre = ? ,descripcion = ? where id = ?", [nombre,descripcion,id]);
+      
+      if (result.affectedRows === 0) {
+        throw new Error("Categoria no encontrada");  
+      }
+      return { id, nombre, descripcion}
+      
+    } catch (error) {
+      console.log(error.message);
+      throw new Error("Error al actualizar la categoria");
     }
+  }
+
+  async updateParcial(id, infor) {
+    try {
+      for (const key in infor) {
+      
+      const [rows] = await conection.query(`UPDATE categorias set ${key} = ?  where id = ? `,[infor[key],id])
+      
+      }
+      const [respuesta] = await conection.query(`SELECT * FROM categorias where id = ?`, [id])
+
+      return respuesta;
+    } catch (error) {
+      
+    }
+  
+  }
 }
 export default Categoria;

@@ -1,10 +1,13 @@
 import express from 'express';
-import CategoriaController from '../controller/categoriaController.js';
+import CategoriaController from '../controller/CategoriaController.js';
+import { validarCategoria } from '../middlewares/validarCategoria.js';
 
 
 const router = express.Router();
 router.get('/', (CategoriaController.getAllCategorias));
-router.post('/', (CategoriaController.postcategoria));
+router.post('/', validarCategoria, CategoriaController.postcategoria);
+router.put('/:id', CategoriaController.actulizarCategoria);
+router.patch('/:id', CategoriaController.actualizarparcialCategoria);
     
   
   router.post('/', (req, res) => {

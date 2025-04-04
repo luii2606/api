@@ -61,5 +61,15 @@ class Producto {
     }
   
   }
+
+  async delete(id) {
+    try {
+      const [rows] = await conection.query("DELETE FROM productos where id = ?", [id])
+      return rows;
+    
+    } catch (error) {
+      throw new Error("Error al eliminar productos");
+    }
+  }
 }
 export default Producto;

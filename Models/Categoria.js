@@ -62,5 +62,21 @@ class Categoria{
     }
   
   }
+
+  async delete(id) {
+    try {
+      const [validar] = await conection.query("SELECT COUNT(*) AS totalProductos from productos where categoria_id = ?", [id]);
+      if (validar[0].totalProductos > 0) {
+        return {message: "Laa categoria tiene productos asociados, no se puede eliminar"}
+      } else {
+        const [result] = await conection.query("DELETE FROM categorias where id = ?", [id]);
+        return result;
+        
+      }
+    } catch (error) {
+      throw new Error("")
+      
+    }
+  }
 }
 export default Categoria;

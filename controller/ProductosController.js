@@ -32,8 +32,6 @@ class ProductosController{
   static actualizarparcialProducto = async (req, res) => {
     const { id } = req.params;
     const infor = req.body;
-    
-    
     {
       try {
         const OBJProducto = new Producto();
@@ -44,9 +42,18 @@ class ProductosController{
         res.status(500).json({ error: error.message });
       }
     }
-  
-
+  }
+  static eliminarproducto = async (req, res) => {
     
+    try {
+        const { id } = req.params;
+        const OBJProducto = new Producto();
+        const productos = await OBJProducto.delete(id);
+        res.json(productos);
+
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
   }
 }
 export default ProductosController;

@@ -8,6 +8,7 @@ router.get('/', (CategoriaController.getAllCategorias));
 router.post('/', validarCategoria, CategoriaController.postcategoria);
 router.put('/:id', CategoriaController.actulizarCategoria);
 router.patch('/:id', CategoriaController.actualizarparcialCategoria);
+router.delete('/:id',CategoriaController.eliminarcategoria)
     
   
   router.post('/', (req, res) => {

@@ -6,6 +6,7 @@ router.get('/', (ProductosController.getAllproductos));
 router.post('/', (ProductosController.postproductos));
 router.put('/:id', ProductosController.actulizarProducto);
 router.patch('/:id', ProductosController.actualizarparcialProducto);
+router.delete('/:id', ProductosController.eliminarproducto);
     
   
   // router.post('/', (req, res) => {

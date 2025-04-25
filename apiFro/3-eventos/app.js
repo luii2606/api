@@ -1,3 +1,4 @@
+import { validaciones } from "./modulos.js";
 //variables
 const formulario = document.querySelector('form');
 const nombre = document.querySelector('[name="nombre"]')
@@ -6,43 +7,85 @@ const telefono = document.querySelector('[name="telefono"]')
 const documento = document.querySelector('[name="documento"]')
 const usuario = document.querySelector('[name="usuario"]')
 const contrasena = document.querySelector('[name="contrasena"]')
+const politicas = document.querySelector('#politicas');
+const btn = document.querySelector('#btn_validar');
 
 
 //funciones
 const validar = (event) => {
-  
+  event.preventDefault();
   if (nombre.value == "") {
-    alert("Por favor ingrese su nombre");
+
+    if (nombre.nextElementSibling) {
+      nombre.nextElementSibling.remove();
+    }
+
+    nombre.classList.add('borde_rojo');
+    const span = document.createElement('span');
+    span.textContent = "El campo es obligatorio";
+    nombre.insertAdjacentElement('afterend', span);
     nombre.focus();
-    event.preventDefault();
   }
   if (apellido.value == "") {
-    alert("Por favor ingrese su apellido");
+    
+    if (apellido.nextElementSibling) {
+      apellido.nextElementSibling.remove();
+    }
+
+    apellido.classList.add('borde_rojo');
+    const span = document.createElement('span');
+    span.textContent = "El campo es obligatorio";
+    apellido.insertAdjacentElement('afterend', span);
     apellido.focus();
-     event.preventDefault();
   }
-    if (telefono.value == "") {
-    alert("Por favor ingrese su telefono");
-      telefono.focus();
-      event.preventDefault();
-  }
-    if (documento.value == "") {
-    alert("Por favor ingrese su documento");
-      documento.focus();
-      event.preventDefault();
-  }
-    if (usuario.value == "") {
-    alert("Por favor ingrese su usuario");
-      usuario.focus();
-      event.preventDefault();
-  }
-    if (contrasena.value == "") {
-    alert("Por favor ingrese su contrasena");
-      contrasena.focus();
-      event.preventDefault();
-  }
+  if (telefono.value == "") {
+    
+    if (telefono.nextElementSibling) {
+      telefono.nextElementSibling.remove();
+    }
 
+    telefono.classList.add('borde_rojo');
+    const span = document.createElement('span');
+    span.textContent = "El campo es obligatorio";
+    telefono.insertAdjacentElement('afterend', span);
+    telefono.focus();
+  }
+  if (documento.value == "") {
+    
+    if (documento.nextElementSibling) {
+      documento.nextElementSibling.remove();
+    }
 
+    documento.classList.add('borde_rojo');
+    const span = document.createElement('span');
+    span.textContent = "El campo es obligatorio";
+    documento.insertAdjacentElement('afterend', span);
+    documento.focus();  
+  }
+  if (usuario.value == "") {
+    
+    if (usuario.nextElementSibling) {
+      usuario.nextElementSibling.remove();
+    }
+
+    usuario.classList.add('borde_rojo');
+    const span = document.createElement('span');
+    span.textContent = "El campo es obligatorio";
+    usuario.insertAdjacentElement('afterend', span);
+    usuario.focus();
+  }
+  if (contrasena.value == "") {
+   
+    if (contrasena.nextElementSibling) {
+      contrasena.nextElementSibling.remove();
+    }
+
+    contrasena.classList.add('borde_rojo');
+    const span = document.createElement('span');
+    span.textContent = "El campo es obligatorio";
+    contrasena.insertAdjacentElement('afterend', span);
+    contrasena.focus();
+  }
 }
 //Solo permite letras y espacios, Si presionamos un número u otro símbolo, bloquea la tecla.
 const validar_Cletras = (event) => {
@@ -66,10 +109,37 @@ const validar_Cnumericos = (event) => {
   }
 };
 
+const Limpiar = (event) => {
+  if (event.target.value !== "") {
+    event.target.classList.remove('borde_rojo');
+    if (event.target.nextElementSibling) {
+      event.target.nextElementSibling.remove();
+    }
+  }
+}
+
+
+const acepta = () => {
+  if (!politicas.checked) {
+    btn.setAttribute('disabled', '');
+  } else {
+    btn.removeAttribute('disabled');
+  }
+}
+
 
 //Eventos
-formulario.addEventListener('submit', validar);
-nombre.addEventListener('keydown',validar_Cletras);
-apellido.addEventListener('keydown',validar_Cletras);
-telefono.addEventListener('keydown',validar_Cnumericos);
-documento.addEventListener('keydown',validar_Cnumericos);
+formulario.addEventListener('submit', validaciones);
+
+// nombre.addEventListener('keydown',validar_Cletras);
+// apellido.addEventListener('keydown',validar_Cletras);
+// telefono.addEventListener('keydown',validar_Cnumericos);
+// documento.addEventListener('keydown', validar_Cnumericos);
+
+// nombre.addEventListener('blur',Limpiar);
+// apellido.addEventListener('blur',Limpiar);
+// telefono.addEventListener('blur',Limpiar);
+// documento.addEventListener('blur', Limpiar);
+
+// addEventListener('DOMContentLoaded', acepta);
+// politicas.addEventListener('change', acepta);

@@ -1,4 +1,4 @@
-import { validaciones } from "./modulos.js";
+import { validaciones, limitar,outFocus} from "./modulos.js";
 //variables
 const formulario = document.querySelector('form');
 const nombre = document.querySelector('[name="nombre"]')
@@ -119,27 +119,37 @@ const Limpiar = (event) => {
 }
 
 
-const acepta = () => {
+const deshabilitarbtn = () => {
   if (!politicas.checked) {
     btn.setAttribute('disabled', '');
   } else {
     btn.removeAttribute('disabled');
   }
 }
+const invali = () => {
+  let data = validar(e);
+  console.log(data);
+}
 
 
 //Eventos
+
+nombre.addEventListener("keypress",limitar)
 formulario.addEventListener('submit', validaciones);
 
 // nombre.addEventListener('keydown',validar_Cletras);
 // apellido.addEventListener('keydown',validar_Cletras);
 // telefono.addEventListener('keydown',validar_Cnumericos);
 // documento.addEventListener('keydown', validar_Cnumericos);
+// usuario.addEventListener('keydown', validar_Cletras);
+// contrasena.addEventListener('keydown', validar_Cletras);
 
-// nombre.addEventListener('blur',Limpiar);
-// apellido.addEventListener('blur',Limpiar);
-// telefono.addEventListener('blur',Limpiar);
-// documento.addEventListener('blur', Limpiar);
+// nombre.addEventListener('blur',outFocus);
+// apellido.addEventListener('blur',outFocus);
+// telefono.addEventListener('blur',outFocus);
+// documento.addEventListener('blur', outFocus);
+// usuario.addEventListener('blur', outFocus);
+// contrasena.addEventListener('blur', outFocus);
 
-// addEventListener('DOMContentLoaded', acepta);
-// politicas.addEventListener('change', acepta);
+addEventListener('DOMContentLoaded', deshabilitarbtn);
+politicas.addEventListener('change', deshabilitarbtn);
